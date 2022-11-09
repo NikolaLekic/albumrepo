@@ -1,0 +1,25 @@
+input {
+  border: none;
+  border-bottom: 1px solid $primary;
+  outline: none;
+}
+
+.dropdown-menu {
+  max-width: 100%;
+  overflow: scroll;
+}
+
+.my-custom-scrollbar::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.my-custom-scrollbar::-webkit-scrollbar-track {
+  background: $secondary; /* color of the tracking area */
+}
+
+.my-custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: $primary; /* color of the scroll thumb */
+  border-radius: 3px; /* roundness of the scroll thumb */
+  /* border: 1px solid #000066;  */ /* creates padding around scroll thumb */
+}

@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+// PAGES
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Info from "./pages/Info";
+import AlbumsInfo from "./pages/Albums";
+// COMPONENTS
+import { Navbar, RedirectRoute, ProtectedRoute } from "./components/Molecules";
+// STORE ACTIONS
+import { onSetUser, onGetImages } from "./store/actions";
 
-function App() {
+import "./App.scss";
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userName = sessionStorage.getItem("userName");
+    dispatch(onSetUser(userName));
+    if (userName) {
+      dispatch(onGetImages());
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Navbar />
+        <Switch>
+          <ProtectedRoute exact path={"/dashboard"} component={Dashboard} />
+          <ProtectedRoute exact path={"/dashboard/:id"} component={Info} />
+          <ProtectedRoute exact path={"/albums/:id"} component={AlbumsInfo} />
+          <Route exact path={"/login"} component={Login} />
+          <RedirectRoute />
+        </Switch>
+      </Router>
+    </>
   );
-}
-
+};
 export default App;

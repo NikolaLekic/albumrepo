@@ -1,0 +1,52 @@
+@mixin media-lg {
+  @media screen and(max-width:992px) {
+    @content;
+  }
+}
+
+@mixin media-md-down {
+  @media screen and(max-width:768px) {
+    @content;
+  }
+}
+
+@mixin media-md-up {
+  @media screen and(min-width:768px) {
+    @content;
+  }
+}
+
+@mixin media-sm-down {
+  @media screen and(max-width:576px) {
+    @content;
+  }
+}
+
+@mixin media-sm-up {
+  @media screen and(min-width:576px) {
+    @content;
+  }
+}
+
+@mixin animate-sm($name) {
+  animation: $name 0.3s ease-in-out;
+}
+
+@mixin animate-md($name) {
+  animation: $name 0.5s ease-in-out;
+}
+
+@mixin modalAnimate {
+  @keyframes inAnimation {
+    0% {
+      left: 0;
+      opacity: 0;
+    }
+    100% {
+      left: 50%;
+      opacity: 1;
+    }
+  }
+
+  @include animate-sm(inAnimation);
+}
